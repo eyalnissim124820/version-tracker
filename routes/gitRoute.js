@@ -48,20 +48,22 @@ router.get('/json', async (req, res) => {
         for (const dependency in dependencies) {
             console.log(`lib: ${dependency} ---> version: ${dependencies[dependency]}`);
         }
-        // create new package.json file
-        fs.open('package2.json', 'w', parseInt('0666', 8), function (err, file) {
-            if (err) throw err;
-            console.log('New package.json created');
-            fs.write(file, decoded, (err) => {
-                if (err) throw err;
-                console.log('Content written to file');
-                fs.close(file, (err) => {
-                    if (err) throw err;
-                    console.log('File closed');
-                })
-            })
-        });
         res.send(dependencies)
+        if (response) {
+            // create new package.json file
+            fs.open('package2.json', 'w', parseInt('0666', 8), function (err, file) {
+                if (err) throw err;
+                console.log('New package.json created');
+                fs.write(file, decoded, (err) => {
+                    if (err) throw err;
+                    console.log('Content written to file');
+                    fs.close(file, (err) => {
+                        if (err) throw err;
+                        console.log('File closed');
+                    })
+                })
+            });
+        }
     } catch (error) {
         console.log(error);
     }

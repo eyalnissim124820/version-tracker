@@ -9,7 +9,7 @@ app.use(express.json())
 app.use('/git', gitRoute)
 
 app.use('/', (req, res) => {
-    res.send('hello there1');
+    res.send('main route');
 })
 
 
